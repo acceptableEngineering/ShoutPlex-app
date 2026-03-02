@@ -1,0 +1,399 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 63;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		07F610B16AEA29A218B98D70 /* StreamsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79AC16E7340A093BF1C86F5 /* StreamsViewModel.swift */; };
+		10D09ED7F755447EA5D0C7E0 /* ShoutPlexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2E51A084D1FD7057F5806F /* ShoutPlexApp.swift */; };
+		1163FB16C3275889807563E9 /* AudioStreamPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F16355099144D83FA64B3A4 /* AudioStreamPlayer.swift */; };
+		2A817DF53791710523CD66B0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1A55123CEFCBA8F6F60F52 /* ContentView.swift */; };
+		2AB9FB47D913AB57DB3A9D8D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FDB0C1B4F114563E8A36A5 /* Theme.swift */; };
+		305901EF42D8AE1FCA827B36 /* AddStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B54683086FE4A4191F83B0F /* AddStreamView.swift */; };
+		787EDB087CEF0D50861EE39A /* StreamRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530586FB109AE1130A4C4D19 /* StreamRowView.swift */; };
+		898BA2E56B38DB9D48E19A57 /* StreamCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B51838784FF297172972EB /* StreamCategory.swift */; };
+		95872D54C87EC5847904A739 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35B67FA65A71975152A72CA4 /* Assets.xcassets */; };
+		B66D3556F4CC99BBEDFA9ACC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52A9707E41F3DCA20E10011 /* SettingsView.swift */; };
+		C5F61BB42634309668B6975E /* BroadcastifyCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D144FCF73FAB5ED9C3A7A /* BroadcastifyCredentials.swift */; };
+		CE72356A167AEA0BB236871B /* ManageCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C338DCA6C51318A9361EB /* ManageCategoriesView.swift */; };
+		F6042035AA7405D3E23EE069 /* AudioStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D1CFAB2D44634DD26C6876 /* AudioStream.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		09D1CFAB2D44634DD26C6876 /* AudioStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioStream.swift; sourceTree = "<group>"; };
+		0B2E51A084D1FD7057F5806F /* ShoutPlexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoutPlexApp.swift; sourceTree = "<group>"; };
+		227487D087A89F328B1FD4CD /* ShoutPlex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoutPlex.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F16355099144D83FA64B3A4 /* AudioStreamPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioStreamPlayer.swift; sourceTree = "<group>"; };
+		35B67FA65A71975152A72CA4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		42B51838784FF297172972EB /* StreamCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamCategory.swift; sourceTree = "<group>"; };
+		4A5AD7B5E4F065D4B99B6607 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4B54683086FE4A4191F83B0F /* AddStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStreamView.swift; sourceTree = "<group>"; };
+		530586FB109AE1130A4C4D19 /* StreamRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamRowView.swift; sourceTree = "<group>"; };
+		8B1A55123CEFCBA8F6F60F52 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B52A9707E41F3DCA20E10011 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		CE2D144FCF73FAB5ED9C3A7A /* BroadcastifyCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastifyCredentials.swift; sourceTree = "<group>"; };
+		D24C338DCA6C51318A9361EB /* ManageCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCategoriesView.swift; sourceTree = "<group>"; };
+		D7FDB0C1B4F114563E8A36A5 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		E292C4814B501922A905FC65 /* ShoutPlex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShoutPlex.entitlements; sourceTree = "<group>"; };
+		F79AC16E7340A093BF1C86F5 /* StreamsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamsViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0FA7BA3F2DE06CDBAB006537 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				227487D087A89F328B1FD4CD /* ShoutPlex.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1E815F5A0F3BACF4BA747FF3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4B54683086FE4A4191F83B0F /* AddStreamView.swift */,
+				8B1A55123CEFCBA8F6F60F52 /* ContentView.swift */,
+				D24C338DCA6C51318A9361EB /* ManageCategoriesView.swift */,
+				B52A9707E41F3DCA20E10011 /* SettingsView.swift */,
+				530586FB109AE1130A4C4D19 /* StreamRowView.swift */,
+				D7FDB0C1B4F114563E8A36A5 /* Theme.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4C53ABAA643C16E711BB7B89 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F79AC16E7340A093BF1C86F5 /* StreamsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		8E9EDA933CF151A44AA2EA90 /* ShoutPlex */ = {
+			isa = PBXGroup;
+			children = (
+				35B67FA65A71975152A72CA4 /* Assets.xcassets */,
+				DADC62150BF36324D4A6DC4B /* App */,
+				E73085536FB2815246B1D093 /* Models */,
+				9D0E43932B2797C522A1003D /* Services */,
+				4C53ABAA643C16E711BB7B89 /* ViewModels */,
+				1E815F5A0F3BACF4BA747FF3 /* Views */,
+			);
+			path = ShoutPlex;
+			sourceTree = "<group>";
+		};
+		8FF56201118B18A4C09A51C8 = {
+			isa = PBXGroup;
+			children = (
+				8E9EDA933CF151A44AA2EA90 /* ShoutPlex */,
+				0FA7BA3F2DE06CDBAB006537 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9D0E43932B2797C522A1003D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2F16355099144D83FA64B3A4 /* AudioStreamPlayer.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		DADC62150BF36324D4A6DC4B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				4A5AD7B5E4F065D4B99B6607 /* Info.plist */,
+				E292C4814B501922A905FC65 /* ShoutPlex.entitlements */,
+				0B2E51A084D1FD7057F5806F /* ShoutPlexApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		E73085536FB2815246B1D093 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				09D1CFAB2D44634DD26C6876 /* AudioStream.swift */,
+				CE2D144FCF73FAB5ED9C3A7A /* BroadcastifyCredentials.swift */,
+				42B51838784FF297172972EB /* StreamCategory.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5212C431A91CDD6E862C99A5 /* ShoutPlex */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 86582BF9296E3DEC6C77640D /* Build configuration list for PBXNativeTarget "ShoutPlex" */;
+			buildPhases = (
+				733FDC9BD9B7BF0B6BDE8D30 /* Sources */,
+				A3FA14ED6F30501DA908BC79 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShoutPlex;
+			packageProductDependencies = (
+			);
+			productName = ShoutPlex;
+			productReference = 227487D087A89F328B1FD4CD /* ShoutPlex.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		990489A979BA99787FCBB78D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					5212C431A91CDD6E862C99A5 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 420577BC9315D05EE755D9CE /* Build configuration list for PBXProject "ShoutPlex" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 8FF56201118B18A4C09A51C8;
+			minimizedProjectReferenceProxies = 1;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5212C431A91CDD6E862C99A5 /* ShoutPlex */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A3FA14ED6F30501DA908BC79 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95872D54C87EC5847904A739 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		733FDC9BD9B7BF0B6BDE8D30 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				305901EF42D8AE1FCA827B36 /* AddStreamView.swift in Sources */,
+				F6042035AA7405D3E23EE069 /* AudioStream.swift in Sources */,
+				1163FB16C3275889807563E9 /* AudioStreamPlayer.swift in Sources */,
+				C5F61BB42634309668B6975E /* BroadcastifyCredentials.swift in Sources */,
+				2A817DF53791710523CD66B0 /* ContentView.swift in Sources */,
+				CE72356A167AEA0BB236871B /* ManageCategoriesView.swift in Sources */,
+				B66D3556F4CC99BBEDFA9ACC /* SettingsView.swift in Sources */,
+				10D09ED7F755447EA5D0C7E0 /* ShoutPlexApp.swift in Sources */,
+				898BA2E56B38DB9D48E19A57 /* StreamCategory.swift in Sources */,
+				787EDB087CEF0D50861EE39A /* StreamRowView.swift in Sources */,
+				07F610B16AEA29A218B98D70 /* StreamsViewModel.swift in Sources */,
+				2AB9FB47D913AB57DB3A9D8D /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1074AEF76BC92A24D8DE1ABB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ShoutPlex/App/ShoutPlex.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M4V8E38DQ8;
+				INFOPLIST_FILE = ShoutPlex/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.acceptableengineering.ShoutPlex;
+				PRODUCT_NAME = ShoutPlex;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9FB7C8067BB91C398F4A124F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DD37BD0E7B2652AE3545FC1E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E742C61CDE84F8C29DA61A73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ShoutPlex/App/ShoutPlex.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M4V8E38DQ8;
+				INFOPLIST_FILE = ShoutPlex/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.acceptableengineering.ShoutPlex;
+				PRODUCT_NAME = ShoutPlex;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		420577BC9315D05EE755D9CE /* Build configuration list for PBXProject "ShoutPlex" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD37BD0E7B2652AE3545FC1E /* Debug */,
+				9FB7C8067BB91C398F4A124F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		86582BF9296E3DEC6C77640D /* Build configuration list for PBXNativeTarget "ShoutPlex" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1074AEF76BC92A24D8DE1ABB /* Debug */,
+				E742C61CDE84F8C29DA61A73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 990489A979BA99787FCBB78D /* Project object */;
+}

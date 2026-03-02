@@ -1,0 +1,33 @@
+name: ShoutPlex
+options:
+  bundleIdPrefix: com.acceptableengineering
+  deploymentTarget:
+    iOS: "16.0"
+  xcodeVersion: "15.0"
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+    TARGETED_DEVICE_FAMILY: "1,2"
+
+targets:
+  ShoutPlex:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: ShoutPlex
+    resources:
+      - ShoutPlex/Assets.xcassets
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.acceptableengineering.ShoutPlex
+        PRODUCT_NAME: ShoutPlex
+        INFOPLIST_FILE: ShoutPlex/App/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""
+    entitlements:
+      path: ShoutPlex/App/ShoutPlex.entitlements
