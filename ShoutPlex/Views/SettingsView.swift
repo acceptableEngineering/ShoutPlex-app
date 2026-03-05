@@ -8,45 +8,6 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
-                // MARK: Broadcastify
-                Section {
-                    HStack {
-                        Image(systemName: "person.fill")
-                            .foregroundStyle(Color.spBlue)
-                            .frame(width: 24)
-                        TextField("Username", text: $vm.credentials.username)
-                            .textInputAutocapitalization(.never)
-                            .autocorrectionDisabled()
-                    }
-
-                    HStack {
-                        Image(systemName: "key.fill")
-                            .foregroundStyle(Color.spBlue)
-                            .frame(width: 24)
-                        Group {
-                            if showPassword {
-                                TextField("Password", text: $vm.credentials.password)
-                            } else {
-                                SecureField("Password", text: $vm.credentials.password)
-                            }
-                        }
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-
-                        Button {
-                            showPassword.toggle()
-                        } label: {
-                            Image(systemName: showPassword ? "eye.slash" : "eye")
-                                .foregroundStyle(.secondary)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                } header: {
-                    Label("Broadcastify", systemImage: "lock.shield")
-                } footer: {
-                    Text("Credentials are stored only on this device and sent **directly and exclusively to Broadcastify** for authentication. They are never transmitted to or stored by ShoutPLEX Multi-Stream or any third party.")
-                }
-
                 // MARK: Organization
                 Section {
                     Toggle(isOn: $vm.isEditMode) {
@@ -82,6 +43,45 @@ struct SettingsView: View {
                     Label("Sidechain Ducking", systemImage: "waveform.path.ecg")
                 } footer: {
                     Text("How far Secondary streams duck when a Primary stream is active. Lower = more ducking. Default: −12 dBFS.")
+                }
+
+                // MARK: Broadcastify
+                Section {
+                    HStack {
+                        Image(systemName: "person.fill")
+                            .foregroundStyle(Color.spBlue)
+                            .frame(width: 24)
+                        TextField("Username", text: $vm.credentials.username)
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled()
+                    }
+
+                    HStack {
+                        Image(systemName: "key.fill")
+                            .foregroundStyle(Color.spBlue)
+                            .frame(width: 24)
+                        Group {
+                            if showPassword {
+                                TextField("Password", text: $vm.credentials.password)
+                            } else {
+                                SecureField("Password", text: $vm.credentials.password)
+                            }
+                        }
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+
+                        Button {
+                            showPassword.toggle()
+                        } label: {
+                            Image(systemName: showPassword ? "eye.slash" : "eye")
+                                .foregroundStyle(.secondary)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                } header: {
+                    Label("Optional Broadcastify Credentials", systemImage: "lock.shield")
+                } footer: {
+                    Text("Credentials are stored only on this device and sent **directly and exclusively to Broadcastify** for authentication. They are never transmitted to or stored by ShoutPLEX Multi-Stream or any third party.")
                 }
 
                 // MARK: About
