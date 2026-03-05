@@ -4,7 +4,6 @@ struct StreamRowView: View {
     @EnvironmentObject var vm: StreamsViewModel
     @ObservedObject private var player = AudioStreamPlayer.shared
     @Binding var stream: AudioStream
-    @State private var showVolumeSlider = false
     @State private var showLockPopover = false
 
     // -30 dBFS threshold: 10^(-30/20) ≈ 0.03162
@@ -67,20 +66,10 @@ struct StreamRowView: View {
                 }
             }
 
-            // Pan + Volume controls
-            HStack(spacing: 0) {
-                panPicker
+            // Role controls (pan hidden pending future UX)
+            HStack {
                 Spacer()
-                volumeButton
-            }
-
-            if showVolumeSlider {
-                Slider(value: Binding(
-                    get: { stream.volume },
-                    set: { vm.setVolume($0, for: stream) }
-                ), in: 0...1)
-                .tint(Color.spBlue)
-                .transition(.opacity.combined(with: .move(edge: .top)))
+                rolePicker
             }
         }
         .padding(.vertical, 4)
@@ -125,7 +114,7 @@ struct StreamRowView: View {
                 Label("Your privacy", systemImage: "hand.raised.fill")
                     .font(.subheadline.bold())
                     .foregroundStyle(Color.spBlue)
-                Text("Your credentials are stored only on this device and sent **directly and exclusively to Broadcastify** for authentication. They are never transmitted to or stored by ShoutPLEX or any third party.")
+                Text("Your credentials are stored only on this device and sent **directly and exclusively to Broadcastify** for authentication. They are never transmitted to or stored by ShoutPLEX Multi-Stream or any third party.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -160,27 +149,25 @@ struct StreamRowView: View {
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.separator), lineWidth: 0.5))
     }
 
-    // MARK: - Volume
+    // MARK: - Role Picker
 
-    private var volumeButton: some View {
-        Button { withAnimation { showVolumeSlider.toggle() } } label: {
-            Label("\(Int((stream.volume * 100).rounded()))%", systemImage: volumeIcon)
-                .font(.caption)
-                .foregroundStyle(showVolumeSlider ? .white : Color.spBlue)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 5)
-                .background(showVolumeSlider ? Color.spBlue : Color(.tertiarySystemFill))
-                .clipShape(RoundedRectangle(cornerRadius: 8))
+    private var rolePicker: some View {
+        HStack(spacing: 0) {
+            ForEach(StreamRole.allCases, id: \.self) { role in
+                Button {
+                    vm.setRole(role, for: stream)
+                } label: {
+                    Text(role.rawValue)
+                        .font(.caption2)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 5)
+                        .background(stream.role == role ? Color.spPink : Color(.tertiarySystemFill))
+                        .foregroundStyle(stream.role == role ? .white : .primary)
+                }
+                .buttonStyle(.plain)
+            }
         }
-        .buttonStyle(.plain)
-    }
-
-    private var volumeIcon: String {
-        switch stream.volume {
-        case 0:         return "speaker.slash"
-        case 0..<0.4:   return "speaker.wave.1"
-        case 0.4..<0.7: return "speaker.wave.2"
-        default:        return "speaker.wave.3"
-        }
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(.separator), lineWidth: 0.5))
     }
 }

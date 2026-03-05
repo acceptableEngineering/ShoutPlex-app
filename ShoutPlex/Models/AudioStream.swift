@@ -1,5 +1,10 @@
 import Foundation
 
+enum StreamRole: String, Codable, CaseIterable {
+    case primary   = "Primary"
+    case secondary = "Secondary"
+}
+
 enum PanMode: String, Codable, CaseIterable {
     case left   = "Left"
     case stereo = "Stereo"
@@ -29,6 +34,7 @@ struct AudioStream: Identifiable, Codable {
     var url: String
     var panMode: PanMode = .stereo
     var volume: Float = 1.0
+    var role: StreamRole = .secondary
     var isPlaying: Bool = false
     var usesBroadcastifyAuth: Bool = false
 

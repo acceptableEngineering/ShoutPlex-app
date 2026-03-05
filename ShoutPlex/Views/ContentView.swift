@@ -63,7 +63,7 @@ struct ContentView: View {
                                 .listRowBackground(Color(.secondarySystemGroupedBackground))
                         }
                         .onMove { vm.moveStreams(in: category.id, from: $0, to: $1) }
-                        .onDelete { vm.removeStreams(at: $0, from: category.id) }
+                        .onDelete(perform: vm.isEditMode ? { vm.removeStreams(at: $0, from: category.id) } : nil)
                     } header: {
                         categoryHeader(for: category)
                     }

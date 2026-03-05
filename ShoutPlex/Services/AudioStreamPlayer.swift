@@ -232,6 +232,16 @@ final class AudioStreamPlayer: ObservableObject {
     private var playingStreamIDs: Set<UUID> = []   // explicit source of truth for Now Playing count
     private var meterTimer: Timer?
 
+    // MARK: - Sidechain ducking
+
+    private var streamRoles: [UUID: StreamRole] = [:]
+    /// Linear duck level applied to Secondary streams when any Primary is hot. Set from ViewModel.
+    private var duckLevelLinear: Float = pow(10.0, -12.0 / 20.0)
+    /// Current ramp position: 1.0 = fully unduck, duckLevelLinear = fully ducked.
+    private var currentDuckMultiplier: Float = 1.0
+    /// -30 dBFS: 10^(-30/20) ≈ 0.03162 — threshold for Primary "hot" detection.
+    private static let primaryThreshold: Float = 0.03162
+
     private init() {
         // Must activate the playback audio session before anything else;
         // without this iOS will not surface Now Playing or lock-screen controls.
@@ -256,6 +266,7 @@ final class AudioStreamPlayer: ObservableObject {
                     }
                     .keys
             )
+            self.updateDucking()
         }
         RunLoop.main.add(t, forMode: .common)
         meterTimer = t
@@ -264,8 +275,12 @@ final class AudioStreamPlayer: ObservableObject {
     // MARK: Public API
 
     func play(stream: AudioStream, credentials: BroadcastifyCredentials?) {
+        streamRoles[stream.id] = stream.role
         if let existing = handles[stream.id] {
             existing.play()
+            if stream.role == .secondary {
+                existing.updateVolume(currentDuckMultiplier)
+            }
         } else {
             let handle = StreamPlayerHandle(stream: stream, credentials: credentials)
             handle.onPlaybackFailed = { [weak self] id, message in
@@ -280,6 +295,9 @@ final class AudioStreamPlayer: ObservableObject {
             }
             handles[stream.id] = handle
             handle.play()
+            if stream.role == .secondary {
+                handle.updateVolume(currentDuckMultiplier)
+            }
         }
         playingStreamIDs.insert(stream.id)
         updateNowPlaying()
@@ -295,6 +313,7 @@ final class AudioStreamPlayer: ObservableObject {
         handles[streamID]?.pause()
         handles.removeValue(forKey: streamID)
         levels.removeValue(forKey: streamID)
+        streamRoles.removeValue(forKey: streamID)
         playingStreamIDs.remove(streamID)
         updateNowPlaying()
     }
@@ -307,6 +326,48 @@ final class AudioStreamPlayer: ObservableObject {
         handles[streamID]?.updatePan(pan)
     }
 
+    func setRole(_ role: StreamRole, for streamID: UUID) {
+        streamRoles[streamID] = role
+        guard let handle = handles[streamID] else { return }
+        if role == .secondary {
+            handle.updateVolume(currentDuckMultiplier)
+        } else {
+            handle.updateVolume(1.0)
+        }
+    }
+
+    func setDuckLevel(db: Double) {
+        duckLevelLinear = Float(pow(10.0, db / 20.0))
+    }
+
+    // MARK: - Sidechain ducking engine
+
+    private func updateDucking() {
+        let anyPrimaryHot = handles.contains { (id, handle) in
+            streamRoles[id] == .primary && handle.currentLevel > Self.primaryThreshold
+        }
+
+        let targetMultiplier: Float = anyPrimaryHot ? duckLevelLinear : 1.0
+        guard currentDuckMultiplier != targetMultiplier else { return }
+
+        let range = 1.0 - duckLevelLinear
+        guard range > 0 else { return }
+
+        let stepSize: Float = anyPrimaryHot
+            ? range / 2.0    // 200 ms attack  (2 × 100 ms ticks)
+            : range / 10.0   // 1 s   release (10 × 100 ms ticks)
+
+        if anyPrimaryHot {
+            currentDuckMultiplier = max(duckLevelLinear, currentDuckMultiplier - stepSize)
+        } else {
+            currentDuckMultiplier = min(1.0, currentDuckMultiplier + stepSize)
+        }
+
+        for (id, handle) in handles where streamRoles[id] == .secondary {
+            handle.updateVolume(currentDuckMultiplier)
+        }
+    }
+
     // MARK: - Now Playing
 
     private func updateNowPlaying() {
@@ -314,12 +375,11 @@ final class AudioStreamPlayer: ObservableObject {
 
         guard activeCount > 0 else {
             MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
-            MPNowPlayingInfoCenter.default().playbackState = .stopped
             return
         }
 
         var info: [String: Any] = [
-            MPMediaItemPropertyTitle:            "ShoutPLEX",
+            MPMediaItemPropertyTitle:            "ShoutPLEX Multi-Stream",
             MPMediaItemPropertyArtist:           "\(activeCount) stream\(activeCount == 1 ? "" : "s") active",
             MPNowPlayingInfoPropertyIsLiveStream: true,
             MPNowPlayingInfoPropertyPlaybackRate: 1.0,
@@ -328,7 +388,6 @@ final class AudioStreamPlayer: ObservableObject {
             info[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { _ in image }
         }
         MPNowPlayingInfoCenter.default().nowPlayingInfo = info
-        MPNowPlayingInfoCenter.default().playbackState = .playing
     }
 
     // MARK: - Remote Command Center (lock screen controls)

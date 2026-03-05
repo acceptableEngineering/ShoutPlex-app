@@ -15,6 +15,14 @@ final class StreamsViewModel: ObservableObject {
         didSet { UserDefaults.standard.set(isEditMode, forKey: editModeKey) }
     }
 
+    /// dBFS level that Secondary streams duck to when a Primary is hot. Range: -40…-1. Default: -12.
+    @Published var duckLevelDB: Double = -12.0 {
+        didSet {
+            UserDefaults.standard.set(duckLevelDB, forKey: duckLevelKey)
+            player.setDuckLevel(db: duckLevelDB)
+        }
+    }
+
     @Published var showMissingCredentialsAlert = false
     @Published var streamPlayError: String?
     @Published var showSettingsFromAlert = false
@@ -26,6 +34,7 @@ final class StreamsViewModel: ObservableObject {
     private let categoriesKey  = "shoutplex.categories"
     private let credentialsKey = "shoutplex.credentials"
     private let editModeKey    = "shoutplex.editMode"
+    private let duckLevelKey   = "shoutplex.duckLevelDB"
     private var cancellables   = Set<AnyCancellable>()
 
     init() {
@@ -75,9 +84,10 @@ final class StreamsViewModel: ObservableObject {
 
     // MARK: - Stream Management
 
-    func add(name: String, urlString: String, categoryID: UUID?) {
+    func add(name: String, urlString: String, categoryID: UUID?, role: StreamRole = .secondary) {
         guard !urlString.isEmpty else { return }
-        let stream = AudioStream(name: name, url: urlString)
+        var stream = AudioStream(name: name, url: urlString)
+        stream.role = role
         streams.append(stream)
 
         // Determine target category, auto-creating "Uncategorized" if needed
@@ -135,6 +145,13 @@ final class StreamsViewModel: ObservableObject {
         guard let idx = streams.firstIndex(where: { $0.id == stream.id }) else { return }
         streams[idx].volume = volume
         player.updateVolume(volume, for: stream.id)
+        save()
+    }
+
+    func setRole(_ role: StreamRole, for stream: AudioStream) {
+        guard let idx = streams.firstIndex(where: { $0.id == stream.id }) else { return }
+        streams[idx].role = role
+        player.setRole(role, for: stream.id)
         save()
     }
 
@@ -200,6 +217,10 @@ final class StreamsViewModel: ObservableObject {
 
     private func load() {
         isEditMode = UserDefaults.standard.bool(forKey: editModeKey)
+        duckLevelDB = UserDefaults.standard.object(forKey: duckLevelKey) as? Double ?? -12.0
+        player.setDuckLevel(db: duckLevelDB)
+
+        let isFirstLaunch = UserDefaults.standard.data(forKey: streamsKey) == nil
 
         if let data = UserDefaults.standard.data(forKey: streamsKey),
            let saved = try? JSONDecoder().decode([AudioStream].self, from: data) {
@@ -209,9 +230,18 @@ final class StreamsViewModel: ObservableObject {
            let saved = try? JSONDecoder().decode([StreamCategory].self, from: data) {
             categories = saved
         }
+
+        if isFirstLaunch {
+            seedDefaultStreams()
+        }
         if let data = UserDefaults.standard.data(forKey: credentialsKey),
            let saved = try? JSONDecoder().decode(BroadcastifyCredentials.self, from: data) {
             credentials = saved
+        }
+
+        // Sync all stream roles into the player so ducking is correct on restore.
+        for stream in streams {
+            player.setRole(stream.role, for: stream.id)
         }
 
         migrateUncategorizedStreams()
@@ -234,6 +264,30 @@ final class StreamsViewModel: ObservableObject {
             player.play(stream: stream, credentials: creds)
         }
         if needsSave { save() }
+    }
+
+    private func seedDefaultStreams() {
+        // Angeles National Forest
+        var forestNet = AudioStream(name: "Angeles National Forest", url: "https://icecast.landmark717.com/anf-forest-net")
+        forestNet.role = .primary
+        var smmnra = AudioStream(name: "Santa Monica Mtns. Rec. Area", url: "https://icecast.landmark717.com/smmnra")
+        smmnra.role = .primary
+        var anfCat = StreamCategory(name: "SoCal (Demo Scanner Streams)")
+        anfCat.streamIDs = [forestNet.id, smmnra.id]
+
+        // L.A. Public Radio
+        var kjazz = AudioStream(name: "KJazz", url: "https://streaming.live365.com/a49833")
+        kjazz.role = .secondary
+        var kusc = AudioStream(name: "Classical KUSC", url: "https://16603.live.streamtheworld.com:443/KUSCAAC64_SC")
+        kusc.role = .secondary
+        var socal = AudioStream(name: "88.5, The SoCal Sound", url: "https://www.streamvortex.com:8444/s/12200/")
+        socal.role = .secondary
+        var musicCat = StreamCategory(name: "L.A. Public Radio (Demo Music Streams)")
+        musicCat.streamIDs = [kjazz.id, kusc.id, socal.id]
+
+        streams = [forestNet, smmnra, kjazz, kusc, socal]
+        categories = [anfCat, musicCat]
+        save()
     }
 
     /// Ensures every stream appears in at least one category.

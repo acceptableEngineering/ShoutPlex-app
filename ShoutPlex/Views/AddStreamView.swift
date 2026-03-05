@@ -14,6 +14,7 @@ struct AddStreamView: View {
     @State private var urlString         = ""
     @State private var broadcastifyID    = ""
     @State private var selectedCategoryID: UUID? = nil
+    @State private var selectedRole: StreamRole = .secondary
     @FocusState private var primaryFieldFocused: Bool
 
     private static let broadcastifyBase = "https://audio.broadcastify.com/"
@@ -55,6 +56,7 @@ struct AddStreamView: View {
                 // MARK: Stream details
                 Section {
                     TextField("Display name (optional)", text: $name)
+                        .textInputAutocapitalization(.words)
 
                     if inputMode == .fullURL {
                         TextField("https://…", text: $urlString)
@@ -84,6 +86,22 @@ struct AddStreamView: View {
                     } else {
                         Text("Enter the numeric or alphanumeric stream ID from your Broadcastify feed page.")
                     }
+                }
+
+                // MARK: Sidechain role
+                Section {
+                    Picker("Role", selection: $selectedRole) {
+                        ForEach(StreamRole.allCases, id: \.self) { role in
+                            Text(role.rawValue).tag(role)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                } header: {
+                    Text("Sidechain Role")
+                } footer: {
+                    Text(selectedRole == .primary
+                         ? "This stream's audio level triggers ducking on Secondary streams."
+                         : "This stream ducks when a Primary stream exceeds the activity threshold.")
                 }
 
                 // MARK: Category picker
@@ -122,7 +140,7 @@ struct AddStreamView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Add") {
                         let label = name.isEmpty ? inferName(from: resolvedURL) : name
-                        vm.add(name: label, urlString: resolvedURL, categoryID: selectedCategoryID)
+                        vm.add(name: label, urlString: resolvedURL, categoryID: selectedCategoryID, role: selectedRole)
                         dismiss()
                     }
                     .disabled(!canAdd)
