@@ -243,16 +243,6 @@ final class AudioStreamPlayer: ObservableObject {
     private static let primaryThreshold: Float = 0.03162
 
     private init() {
-        // Must activate the playback audio session before anything else;
-        // without this iOS will not surface Now Playing or lock-screen controls.
-        do {
-            try AVAudioSession.sharedInstance().setCategory(
-                .playback, mode: .default,
-                options: [.allowBluetooth, .allowAirPlay, .allowBluetoothA2DP]
-            )
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {}
-
         setupRemoteCommandCenter()
 
         let t = Timer(timeInterval: 0.1, repeats: true) { [weak self] _ in

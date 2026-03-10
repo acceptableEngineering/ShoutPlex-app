@@ -20,7 +20,7 @@ struct ShoutPlexApp: App {
         do {
             let session = AVAudioSession.sharedInstance()
             // .mixWithOthers lets multiple AVPlayer instances play simultaneously
-            try session.setCategory(.playback, mode: .default, options: [.mixWithOthers, .allowBluetoothA2DP, .allowAirPlay])
+            try session.setCategory(.playback, mode: .default, options: [.mixWithOthers])
             try session.setActive(true)
         } catch {
             print("AudioSession setup failed: \(error)")

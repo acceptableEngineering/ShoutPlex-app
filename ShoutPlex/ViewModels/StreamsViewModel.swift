@@ -275,18 +275,8 @@ final class StreamsViewModel: ObservableObject {
         var anfCat = StreamCategory(name: "SoCal (Demo Scanner Streams)")
         anfCat.streamIDs = [forestNet.id, smmnra.id]
 
-        // L.A. Public Radio
-        var kjazz = AudioStream(name: "KJazz", url: "https://streaming.live365.com/a49833")
-        kjazz.role = .secondary
-        var kusc = AudioStream(name: "Classical KUSC", url: "https://16603.live.streamtheworld.com:443/KUSCAAC64_SC")
-        kusc.role = .secondary
-        var socal = AudioStream(name: "88.5, The SoCal Sound", url: "https://www.streamvortex.com:8444/s/12200/")
-        socal.role = .secondary
-        var musicCat = StreamCategory(name: "L.A. Public Radio (Demo Music Streams)")
-        musicCat.streamIDs = [kjazz.id, kusc.id, socal.id]
-
-        streams = [forestNet, smmnra, kjazz, kusc, socal]
-        categories = [anfCat, musicCat]
+        streams = [forestNet, smmnra]
+        categories = [anfCat]
         save()
     }
 
@@ -310,7 +300,7 @@ final class StreamsViewModel: ObservableObject {
         if let existing = categories.first(where: { $0.name == "Uncategorized" && $0.id != excludedID }) {
             return existing.id
         }
-        var uncat = StreamCategory(name: "Uncategorized")
+        let uncat = StreamCategory(name: "Uncategorized")
         categories.append(uncat)
         return uncat.id
     }
